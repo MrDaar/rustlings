@@ -9,6 +9,13 @@
 
 // Put your function here!
 // fn ..... {
+fn calculate_price(price: u8) -> u8 {
+    if price % 2 == 0 {
+        price * 2
+    } else {
+        price
+    }
+}
 
 // Don't modify this function!
 #[test]

@@ -9,8 +9,18 @@ pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
     match c.next() {
         None => String::new(),
-        Some(first) => first.collect()::<String>() + c.as_str(),
+        Some(first) => {
+            first.to_uppercase().to_string() + c.as_str().trim_start_matches(first)
+        },
     }
+}
+
+pub fn capitalize_words(input: Vec<&str>) -> Vec<String> {
+    let mut vec_string = vec![String::new(); input.len()];
+    for i in 0..input.len() {
+        vec_string[i] = capitalize_first(input[i])
+    }
+    vec_string
 }
 
 #[cfg(test)]
@@ -33,14 +43,14 @@ mod tests {
     #[test]
     fn test_iterate_string_vec() {
         let words = vec!["hello", "world"];
-        let capitalized_words: Vec<String> = // TODO
+        let capitalized_words: Vec<String> = capitalize_words(words); // TODO
         assert_eq!(capitalized_words, ["Hello", "World"]);
     }
 
     #[test]
     fn test_iterate_into_string() {
         let words = vec!["hello", " ", "world"];
-        let capitalized_words = // TODO
+        let capitalized_words = capitalize_words(words).concat(); // TODO
         assert_eq!(capitalized_words, "Hello World");
     }
 }
